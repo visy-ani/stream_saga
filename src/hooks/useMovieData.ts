@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Movie } from '../types/movie';
 import { data } from '../sample';
 
@@ -13,6 +13,7 @@ export const useMovieData = () => {
       contentRating: item.contentRating || '',
       metascore: item.metascore || 0,
       grossWorldwide: item.grossWorldwide || 0,
+      spokenLanguages: item.spokenLanguages || [],
     }));
     setMovies(formattedData);
     setIsLoading(false);
@@ -36,9 +37,9 @@ export const useMovieNavigation = (movies: Movie[]) => {
     setIsAutoPlaying(false);
   };
 
-  const nextMovie = () => {
+  const nextMovie = useCallback(() => {
     changeMovie((currentIndex + 1) % movies.length);
-  };
+  }, [currentIndex, movies.length]);
 
   const prevMovie = () => {
     changeMovie((currentIndex - 1 + movies.length) % movies.length);
@@ -52,7 +53,7 @@ export const useMovieNavigation = (movies: Movie[]) => {
       }, 8000);
     }
     return () => clearInterval(timer);
-  }, [isAutoPlaying, isTransitioning, movies.length, currentIndex]);
+  }, [isAutoPlaying, isTransitioning, movies.length, currentIndex, nextMovie]);
 
   return {
     currentIndex,

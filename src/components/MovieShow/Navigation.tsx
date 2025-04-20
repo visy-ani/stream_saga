@@ -17,7 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({
   return (
     <nav className="flex justify-between items-center mb-12">
       <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-purple-500 to-cyan-500 animate-gradient-x hover:scale-105 transition-transform cursor-pointer">
-        CINEMA SHOWCASE
+        Stream Saga
       </h1>
       <div className="flex items-center gap-6">
         <button

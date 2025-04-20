@@ -62,7 +62,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </button>
 
       <div className="hidden md:flex items-center gap-2 px-4 max-w-sm overflow-x-auto scrollbar-hide">
-        {getVisiblePaginationDots().map((item, _) => (
+        {getVisiblePaginationDots().map((item) => (
           item.type === 'dot' ? (
             <button
               key={`dot-${item.index}`}

@@ -17,6 +17,7 @@ export interface Movie {
     runtimeMinutes: number;
     startYear: number;
     grossWorldwide: number;
-    directors?: Person[];
+    interests?: string[];
+    spokenLanguages?: string[];
     cast?: Person[];
 }

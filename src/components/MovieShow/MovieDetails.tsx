@@ -1,7 +1,8 @@
-// components/MovieDetails.tsx
+
 import { Star, Clock, Calendar, Globe } from 'lucide-react';
 import { Movie } from '../../types/movie';
 import { formatMoney, formatVotes, formatRuntime } from '../../utils/formatting';
+import CastAndCrew from './InterestsAndLanguage';
 
 interface MovieDetailsProps {
   movie: Movie;
@@ -9,8 +10,9 @@ interface MovieDetailsProps {
   isTransitioning: boolean;
 }
 
-// MovieDetails component displays detailed information about a movie, including it's title, genres, description, ratings, runtime, release year, box office earnings, and cast & crew.
+// This component displays detailed information about a movie, including it's title, genres, description, ratings, runtime, release year, box office earnings, and cast & crew.
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, index, isTransitioning }) => {
+  console.log(movie)
   return (
     <div className="w-full lg:w-2/3 flex flex-col justify-center space-y-8">
       <div className="space-y-6">
@@ -72,23 +74,11 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, index, isTransitioni
           </div>
         </div>
 
-        <div className={`space-y-4 ${isTransitioning ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'} transition-all duration-500 delay-500`}>
-          <h3 className="text-2xl font-semibold">Cast & Crew</h3>
-          <div className="flex flex-wrap gap-4">
-            {movie?.directors?.map((director, index) => (
-              <div key={index} className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-white/10 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 hover:scale-105 cursor-pointer">
-                <p className="text-sm text-gray-400">Director</p>
-                <p className="font-medium text-lg">{director.fullName}</p>
-              </div>
-            ))}
-            {movie?.cast?.slice(0, 3).map((actor, index) => (
-              <div key={index} className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-white/10 hover:from-blue-500/20 hover:to-cyan-500/20 transition-all duration-300 hover:scale-105 cursor-pointer">
-                <p className="text-sm text-gray-400">{actor.characters ? actor.characters[0] : 'Actor'}</p>
-                <p className="font-medium text-lg">{actor.fullName}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <CastAndCrew
+          interests={movie.interests}
+          spokenLanguages={movie.spokenLanguages}
+          isTransitioning={isTransitioning}
+        />
       </div>
     </div>
   );
