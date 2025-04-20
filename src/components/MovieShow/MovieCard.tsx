@@ -22,7 +22,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isTransitioning }) => {
           />
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-            <button className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 text-white rounded-xl font-bold hover:from-rose-600 hover:to-purple-700 transition-all transform hover:scale-105">
+            <button onClick={() => window.open(movie.trailer, '_blank')} className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 text-white rounded-xl font-bold hover:from-rose-600 hover:to-purple-700 transition-all transform hover:scale-105 cursor-pointer">
               Watch Trailer
             </button>
           </div>

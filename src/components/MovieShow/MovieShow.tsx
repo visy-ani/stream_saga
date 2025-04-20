@@ -11,7 +11,6 @@ import Pagination from "./Pagination";
 import NextMoviePreview from "./NextMoviePreview";
 import BackgroundEffect from "../BackgroundEffect";
 import Loading from "../Loading";
-import Navbar from "../Navbar/Navbar";
 
 const MovieShowcase: React.FC = () => {
   const { movies, isLoading } = useMovieData();
@@ -53,9 +52,6 @@ const MovieShowcase: React.FC = () => {
         isHovering={isHovering}
         isTransitioning={isTransitioning}
       />
-
-      {/* Navbar component for navigation */}
-      <Navbar />
 
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-6 py-8 flex flex-col min-h-screen">

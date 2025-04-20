@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Movie } from '../types/movie';
-import { data } from '../sample';
+import { data } from '../Samples/sample';
 
 // This hook fetches and formats movie data from a sample dataset. It initializes the movies state and loading state, and formats the data to ensure all fields are present.
 export const useMovieData = () => {

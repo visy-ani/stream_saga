@@ -19,5 +19,6 @@ export interface Movie {
     grossWorldwide: number;
     interests?: string[];
     spokenLanguages?: string[];
+    trailer?: string;
     cast?: Person[];
 }
