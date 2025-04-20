@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Movie } from '../types/movie'; 
 
-// This custom hook fetches popular movies.
 const usePopularMovies = () => {
-  const [movies, setMovies] = useState<any[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -14,22 +14,23 @@ const usePopularMovies = () => {
         url: 'https://imdb236.p.rapidapi.com/imdb/most-popular-movies',
         headers: {
           'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
-          'x-rapidapi-host': 'imdb236.p.rapidapi.com'
-        }
+          'x-rapidapi-host': 'imdb236.p.rapidapi.com',
+        },
       };
 
       try {
         const response = await axios.request(options);
-        setMovies(response.data);
+        const rawData = response.data?.data || [];
+        setMovies(rawData); 
         setIsLoading(false);
-      } catch (error) {
+      } catch {
         setError('Failed to fetch data');
         setIsLoading(false);
       }
     };
 
     fetchMovies();
-  }, []); 
+  }, []);
 
   return { movies, isLoading, error };
 };

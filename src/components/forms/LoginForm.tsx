@@ -1,18 +1,51 @@
 import { useState } from "react";
 import { Film, Lock, Mail, Key } from "lucide-react";
+import { useAuth } from "../../context/AuthContext"; // Assuming useAuth is set up to provide the authentication methods
+import { useNavigate } from "react-router-dom"; // React Router hook
+import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth"; // Firebase providers
 
 type LoginFormProps = {
   onSwitchMode: () => void;
-}
+};
 
 const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const { login, signInWithProvider } = useAuth(); 
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      await login(email, password);
+      navigate("/"); 
+    } catch {
+      setError("Invalid email or password");
+    }
+  };  
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithProvider(new GoogleAuthProvider()); // Using Firebase GoogleAuthProvider
+      navigate("/"); // Redirect after successful login
+    } catch {
+      setError("Google login failed");
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      await signInWithProvider(new FacebookAuthProvider()); // Using Firebase FacebookAuthProvider
+      navigate("/"); // Redirect after successful login
+    } catch {
+      setError("Facebook login failed");
+    }
+  };
 
   return (
-    <div 
-      className="w-full max-w-md mx-auto space-y-4 bg-transparent"
-    >
+    <div className="w-full max-w-md mx-auto space-y-4 bg-transparent">
       {/* Header */}
       <div className="flex items-center justify-center space-x-3 mb-6">
         <Film className="text-red-500 h-7 w-7" />
@@ -57,20 +90,22 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
         </div>
       </div>
 
+      {/* Error message */}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+
       {/* Remember Me & Forgot Password */}
       <div className="flex items-center justify-between text-sm">
         <div className="flex items-center">
-          <input 
-            id="remember-me" 
-            type="checkbox" 
+          <input
+            id="remember-me"
+            type="checkbox"
             className="h-4 w-4 text-red-600 bg-gray-800/80 border-gray-600 rounded"
           />
-          <label htmlFor="remember-me" className="ml-2 text-gray-300">Remember me</label>
+          <label htmlFor="remember-me" className="ml-2 text-gray-300">
+            Remember me
+          </label>
         </div>
-        <a 
-          href="#" 
-          className="text-red-400 hover:text-red-300"
-        >
+        <a href="#" className="text-red-400 hover:text-red-300">
           Forgot password?
         </a>
       </div>
@@ -79,8 +114,9 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
       <button
         type="submit"
         className="w-full py-3 px-4 bg-gradient-to-r from-red-600 to-purple-600 text-white font-medium rounded-lg text-lg cursor-pointer"
+        onClick={handleLogin}
       >
-        <span className="flex items-center justify-center" onClick={onSwitchMode}>
+        <span className="flex items-center justify-center">
           <Lock className="mr-2 h-4 w-4" />
           Sign In
         </span>
@@ -89,7 +125,7 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
       {/* Sign Up */}
       <div className="text-center">
         <p className="text-sm text-gray-400">
-          Don't have an account? {" "}
+          Don't have an account?{" "}
           <span
             className="text-red-400 hover:text-red-300 font-medium cursor-pointer"
             onClick={onSwitchMode}
@@ -114,12 +150,14 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
           <button
             type="button"
             className="py-2 px-4 bg-gray-800/60 hover:bg-gray-700/60 text-gray-300 text-base font-medium rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer"
+            onClick={handleGoogleLogin}
           >
             Google
           </button>
           <button
             type="button"
             className="py-2 px-4 bg-gray-800/60 hover:bg-gray-700/60 text-gray-300 text-base font-medium rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer"
+            onClick={handleFacebookLogin}
           >
             Facebook
           </button>

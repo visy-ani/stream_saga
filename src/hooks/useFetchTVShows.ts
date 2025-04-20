@@ -34,8 +34,12 @@ const useTop250TVShows = (): UseTop250TVShowsReturn => {
       try {
         const response = await axios.request(options);
         setData(response.data.results || []);
-      } catch (err: any) {
-        setError(err.message || 'Something went wrong');
+      } catch (err: unknown) {
+        if(err instanceof Error) {
+          setError(err.message || 'Something went wrong');
+        } else{
+          setError('Something went wrong');
+        }
       } finally {
         setLoading(false);
       }

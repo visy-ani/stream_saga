@@ -1,29 +1,23 @@
-import {
-  Search,
-  Menu,
-  X,
-  Film,
-  Tv,
-  Library,
-  Home,
-} from "lucide-react";
+import { Search, Menu, X, Film, Tv, Library, Home, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
-
+import { useAuth } from "../../context/AuthContext"; 
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate(); 
+  const { logout } = useAuth(); 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [menuPhase, setMenuPhase] = useState<"closed" | "opening" | "open" | "closing">("closed");
+  const [menuPhase, setMenuPhase] = useState("closed");
 
   const tabs = [
     { name: "Home", icon: <Home size={24} />, path: "/" },
     { name: "Popular", icon: <Film size={24} />, path: "/popular" },
-    { name: "TV Shows", icon: <Tv size={24} /> , path: "/tv-shows"},
-    { name: "My Library", icon: <Library size={24} /> , path: "/my-library"},
+    { name: "TV Shows", icon: <Tv size={24} />, path: "/tv-shows" },
+    { name: "My Library", icon: <Library size={24} />, path: "/my-library" },
   ];
 
   useEffect(() => {
@@ -45,6 +39,15 @@ export default function Navbar() {
       setIsMobileMenuOpen(true);
       setMenuPhase("opening");
       setTimeout(() => setMenuPhase("open"), 50);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout(); // Call your logout function from the Auth context
+      navigate("/login"); // Redirect to the login page
+    } catch (err) {
+      console.error("Logout error", err);
     }
   };
 
@@ -91,6 +94,14 @@ export default function Navbar() {
                 className="w-full h-full object-cover"
               />
             </div>
+            {/* Logout Button - Only visible on non-mobile screens */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-1 text-gray-400 hover:text-white transition-all duration-300 hover:scale-105"
+            >
+              <LogOut size={20} />
+              <span className="text-sm font-medium">Logout</span>
+            </button>
           </div>
         </div>
 
@@ -126,7 +137,7 @@ export default function Navbar() {
               >
                 <Search size={20} />
               </button>
-              <ProfileMenu onLogout={() => console.log("Logout")} />
+              <ProfileMenu onLogout={handleLogout} />
             </div>
           </div>
 
