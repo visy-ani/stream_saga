@@ -4,6 +4,7 @@ import AuthPage from "./pages/AuthPage";
 import Home from "./pages/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import PopularPage from "./pages/PopularPage";
+import TVShowsPage from "./pages/TVShowsPage";
 
 const AppContent = () => {
   const location = useLocation();
@@ -18,7 +19,7 @@ const AppContent = () => {
         <Route path={ROUTES.AUTH} element={<AuthPage />} />
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.POPULAR} element={<PopularPage />} />
-        <Route path={ROUTES.TV_SHOWS} element={<Home />} />
+        <Route path={ROUTES.TV_SHOWS} element={<TVShowsPage />} />
         <Route path={ROUTES.MY_LIBRARY} element={<Home />} />
       </Routes>
     </>

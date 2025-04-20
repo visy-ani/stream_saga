@@ -6,6 +6,7 @@ export interface Person {
 
 // This interface defines the structure of a movie object
 export interface Movie {
+    id?: string;
     primaryTitle: string;
     primaryImage: string;
     contentRating?: string;
@@ -21,4 +22,10 @@ export interface Movie {
     spokenLanguages?: string[];
     trailer?: string;
     cast?: Person[];
+    releaseDate?: string;
+    budget?: number;
+    filmingLocations?: string[];
+    url?: string;
+    endYear?: number | null;
+    countriesOfOrigin?: string[];
 }

@@ -14,6 +14,7 @@ export const useMovieData = () => {
       metascore: item.metascore || 0,
       grossWorldwide: item.grossWorldwide || 0,
       spokenLanguages: item.spokenLanguages || [],
+      trailer: item.trailer || undefined, // Ensure trailer is string or undefined
     }));
     setMovies(formattedData);
     setIsLoading(false);
