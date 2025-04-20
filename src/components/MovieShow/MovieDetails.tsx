@@ -12,7 +12,6 @@ interface MovieDetailsProps {
 
 // This component displays detailed information about a movie, including it's title, genres, description, ratings, runtime, release year, box office earnings, and cast & crew.
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, index, isTransitioning }) => {
-  console.log(movie)
   return (
     <div className="w-full lg:w-2/3 flex flex-col justify-center space-y-8">
       <div className="space-y-6">
