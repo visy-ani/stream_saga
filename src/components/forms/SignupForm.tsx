@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Film, Lock, Mail, Key } from "lucide-react";
+import { Film, Lock, Mail, Key, User } from "lucide-react";
 
-type LoginFormProps = {
+type SignupFormProps = {
   onSwitchMode: () => void;
-}
+};
 
-const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
+const SignupForm = ({ onSwitchMode }: SignupFormProps) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,6 +20,24 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
         <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-purple-600">
           Stream Saga
         </h2>
+      </div>
+
+      {/* Name Input */}
+      <div className="relative">
+        <label htmlFor="name" className="block text-base font-medium text-gray-300 mb-2 ml-1">
+          Full Name
+        </label>
+        <div className="relative">
+          <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 bg-gray-800/60 rounded-lg text-white focus:outline-none focus:border-red-500/70 focus:ring-2 focus:ring-red-500/30 transition-all duration-300 backdrop-blur-sm text-lg"
+            placeholder="John Doe"
+          />
+        </div>
       </div>
 
       {/* Email Input */}
@@ -57,45 +76,44 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
         </div>
       </div>
 
-      {/* Remember Me & Forgot Password */}
-      <div className="flex items-center justify-between text-sm">
-        <div className="flex items-center">
+      {/* Terms and Conditions */}
+      <div className="flex items-start text-sm">
+        <div className="flex items-center h-5">
           <input 
-            id="remember-me" 
+            id="terms" 
             type="checkbox" 
             className="h-4 w-4 text-red-600 bg-gray-800/80 border-gray-600 rounded"
           />
-          <label htmlFor="remember-me" className="ml-2 text-gray-300">Remember me</label>
         </div>
-        <a 
-          href="#" 
-          className="text-red-400 hover:text-red-300"
-        >
-          Forgot password?
-        </a>
+        <div className="ml-2">
+          <label htmlFor="terms" className="text-gray-300">
+            I agree to the <a href="#" className="text-red-400 hover:text-red-300">Terms of Service</a> and <a href="#" className="text-red-400 hover:text-red-300">Privacy Policy</a>
+          </label>
+        </div>
       </div>
 
-      {/* Sign In Button */}
+      {/* Sign Up Button */}
       <button
         type="submit"
         className="w-full py-3 px-4 bg-gradient-to-r from-red-600 to-purple-600 text-white font-medium rounded-lg text-lg cursor-pointer"
       >
-        <span className="flex items-center justify-center" onClick={onSwitchMode}>
+        <span className="flex items-center justify-center">
           <Lock className="mr-2 h-4 w-4" />
-          Sign In
+          Create Account
         </span>
       </button>
 
-      {/* Sign Up */}
+      {/* Sign In */}
       <div className="text-center">
         <p className="text-sm text-gray-400">
-          Don't have an account? {" "}
-          <span
-            className="text-red-400 hover:text-red-300 font-medium cursor-pointer"
+          Already have an account? {" "}
+          <a 
+            href="#" 
+            className="text-red-400 hover:text-red-300 font-medium"
             onClick={onSwitchMode}
           >
-            Sign up
-          </span>
+            Sign in
+          </a>
         </p>
       </div>
 
@@ -129,4 +147,4 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

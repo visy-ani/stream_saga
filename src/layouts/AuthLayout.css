@@ -1,81 +1,59 @@
-/* AuthLayout.css */
 .container {
-    position: relative;
-    z-index: 20;
-    width: 100%;
-    max-width: 1024px;
-    min-height: 400px;
-    height: auto;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
-  
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1024px;
+  min-height: 400px;
+  height: auto;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.formWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+}
+
+.posters{
+  width: 100vw;
+}
+
+.leftSide {
+  width: 50%;
+  position: relative;
+  display: block;
+}
+
+.rightSide {
+  width: 40%;
+  backdrop-filter: blur(20px);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.mask{
+  z-index: 20;
+  position: absolute;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+@media (max-width: 768px) {
   .formWrapper {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: row;
-  }
-  
-  .leftSide {
-    width: 50%;
-    position: relative;
-    display: block;
-  }
-  
-  .rightSide {
-    width: 50%;
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 4rem;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
   }
-  
-  /* Blur overlays */
-  .blurTop,
-  .blurBottom,
-  .blurLeft {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8px);
+
+  .leftSide {
+    display: none;
   }
-  
-  .blurTop {
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2rem;
+
+  .rightSide {
+    width: 100%;
+    padding: 2rem;
   }
-  
-  .blurBottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2rem;
-  }
-  
-  .blurLeft {
-    top: 2rem;
-    bottom: 2rem;
-    left: 0;
-    width: 2rem;
-  }
-  
-  @media (max-width: 768px) {
-    .formWrapper {
-      flex-direction: column;
-    }
-  
-    .leftSide {
-      display: none;
-    }
-  
-    .rightSide {
-      width: 100%;
-      padding: 2rem;
-    }
-  }
-  
+}
