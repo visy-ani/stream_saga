@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { PopularMovies as Movie } from '../types/movie';
 
 const usePopularMovies = () => {
@@ -8,25 +9,21 @@ const usePopularMovies = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
 
     const fetchMovies = async () => {
       try {
-        const response = await fetch('https://imdb236.p.rapidapi.com/imdb/most-popular-movies', {
-          method: 'GET',
+        const response = await axios.get('https://imdb236.p.rapidapi.com/imdb/most-popular-movies', {
           headers: {
             'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
             'x-rapidapi-host': 'imdb236.p.rapidapi.com',
           },
-          signal,
+          signal: controller.signal,
         });
-
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const data = await response.json();
-        setMovies(data || []);
+        setMovies(response.data || []);
       } catch (err: any) {
-        if (err.name !== 'AbortError') {
+        if (axios.isCancel(err)) {
+          console.log('Request canceled:', err.message);
+        } else {
           console.error('Fetch error:', err);
           setError('Failed to fetch data');
         }
@@ -38,7 +35,7 @@ const usePopularMovies = () => {
     fetchMovies();
 
     return () => {
-      controller.abort(); 
+      controller.abort();
     };
   }, []);
   return { movies, isLoading, error };

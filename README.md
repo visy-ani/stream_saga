@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+# Stream-Saga 🎬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An IMDb-style modern movie listing application built using React and TypeScript. It showcases popular movies using a dynamic, responsive interface with stylish UI and smooth user interactions. This is **not** a streaming platform — just a visual movie catalog.
 
-Currently, two official plugins are available:
+![Hero Section](./screenshots/hero.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🎞️ Browse popular movies from IMDb API
+- 🧾 Detailed movie modals with ratings, genre, runtime, budget, language & more
+- 🌐 Responsive grid layout optimized for all devices
+- 🎨 Modern and elegant UI with smooth hover and click animations
+- 🔍 Clean modular code with custom hooks and reusable components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![Movie Grid](./screenshots/grid.png)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+![Movie Modal](./screenshots/modal.png)
+
+## 🛠️ Tech Stack
+
+- **React + TypeScript**
+- **Tailwind CSS** for UI styling
+- **Lucide Icons** for visuals
+- **RapidAPI** (IMDb endpoint) for fetching movie data
+
+## 🧪 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/stream-saga.git
+cd stream-saga
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2. Install dependencies
+```bash
+pnpm install
 ```
+
+### 3. Setup Environment Variables
+Create a `.env` file in the root and add your [RapidAPI](https://rapidapi.com) key:
+```bash
+VITE_RAPIDAPI_KEY=your_rapidapi_key_here
+```
+
+### 4. Run the app
+```bash
+pnpm run dev
+```
+
+Open your browser at `http://localhost:5173`
+
+---
+
+Enjoy exploring movies on **Stream-Saga** 🍿
+
