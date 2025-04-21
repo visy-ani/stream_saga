@@ -70,18 +70,3 @@ const fetchTop250Movies = async (): Promise<Movie[]> => {
 
 export default fetchTop250Movies;
 
-
-
-
-// useEffect(() => {
-//     setIsLoading(true);
-//     fetchTop250Movies()
-//       .then((data) => {
-//         setMovies(data);
-//         setIsLoading(false);
-//       })
-//       .catch((err) => {
-//         console.error('Failed to load top 250 movies:', err);
-//         setIsLoading(false);
-//       });
-//   }, []);

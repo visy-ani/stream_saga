@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Film, Lock, Mail, Key, User, Wand2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom"; // <-- Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 
 type SignupFormProps = {
   onSwitchMode: () => void;
@@ -9,7 +9,7 @@ type SignupFormProps = {
 
 const SignupForm = ({ onSwitchMode }: SignupFormProps) => {
   const { signup, sendSignInLink, loginWithGoogle, loginWithFacebook } = useAuth();
-  const navigate = useNavigate(); // <-- Initialize the navigate hook
+  const navigate = useNavigate(); 
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ const SignupForm = ({ onSwitchMode }: SignupFormProps) => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // This function handles the form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreeToTerms) {
@@ -52,8 +53,8 @@ const SignupForm = ({ onSwitchMode }: SignupFormProps) => {
       } else {
         await loginWithFacebook();
       }
-      // After successful login, redirect to home page
-      navigate("/"); // <-- Navigate to the homepage after provider login
+      
+      navigate("/"); // After successful login, redirect to home page
     } catch (err: unknown) {
       if(err instanceof Error){
         alert(err.message);
@@ -208,14 +209,14 @@ const SignupForm = ({ onSwitchMode }: SignupFormProps) => {
         <div className="mt-4 flex justify-center gap-4">
           <button
             type="button"
-            onClick={() => handleProviderLogin("google")} // <-- Call handleProviderLogin for Google
+            onClick={() => handleProviderLogin("google")} 
             className="py-2 px-4 bg-gray-800/60 hover:bg-gray-700/60 text-gray-300 text-base font-medium rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer"
           >
             Google
           </button>
           <button
             type="button"
-            onClick={() => handleProviderLogin("facebook")} // <-- Call handleProviderLogin for Facebook
+            onClick={() => handleProviderLogin("facebook")} 
             className="py-2 px-4 bg-gray-800/60 hover:bg-gray-700/60 text-gray-300 text-base font-medium rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer"
           >
             Facebook

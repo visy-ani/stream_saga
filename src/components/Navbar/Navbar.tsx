@@ -28,6 +28,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Toggle mobile menu
   const toggleMenu = () => {
     if (isMobileMenuOpen) {
       setMenuPhase("closing");
@@ -42,10 +43,11 @@ export default function Navbar() {
     }
   };
 
+  // handle logout
   const handleLogout = async () => {
     try {
-      await logout(); // Call your logout function from the Auth context
-      navigate("/login"); // Redirect to the login page
+      await logout(); 
+      navigate("/login"); // Redirect to the login page if not authenticated
     } catch (err) {
       console.error("Logout error", err);
     }

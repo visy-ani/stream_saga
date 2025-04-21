@@ -9,6 +9,7 @@ interface UseTop250TVShowsReturn {
   error: string | null;
 }
 
+// custom hook to fetch top tv shows from the api
 const useTop250TVShows = (): UseTop250TVShowsReturn => {
   const [data, setData] = useState<Show[] | null>(null);
   const [loading, setLoading] = useState(true);

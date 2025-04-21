@@ -9,7 +9,7 @@ const usePopularMovies = () => {
   const [error, setError] = useState<string | null>(null);
   const sample = popularMovies;
 
-  // TypeScript type for movie
+  // sample data for fallback
   const normalizeMovie = (movie: any): Movie => ({
     id: movie.id,
     url: movie.url,

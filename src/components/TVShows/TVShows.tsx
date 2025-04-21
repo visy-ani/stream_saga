@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Film, Star, Calendar, Globe, Eye, X, Tv, Languages, Play, Heart, Share2, Award } from 'lucide-react';
 import { Show } from '../../types/movie';
+import { formatDate } from '../../utils/formatting';
 
 interface TVShowsProps {
   shows: Show[] | null; 
@@ -25,14 +26,8 @@ const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
     };
   }, [selectedShow]);
 
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
 
+  // function to close the modal and reset the selected show
   const closeModal = () => {
     setAnimateModal(false);
     setTimeout(() => {

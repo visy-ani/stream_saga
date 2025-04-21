@@ -23,3 +23,12 @@ export const formatVotes = (votes: number): string => {
 export const formatRuntime = (minutes: number): string => {
     return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
 };
+
+// format a data string into a more readable format (e.g., january 1, 2023)
+export const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+};

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, X, Calendar, Clock, Globe, Star, DollarSign, Film, MapPin, Volume2 } from 'lucide-react';
 import { PopularMovies as Movie } from '../../types/movie';
+import { formatDate } from '../../utils/formatting';
 
 interface PopularMoviesProps {
   movies: Movie[]; 
@@ -10,7 +11,7 @@ const PopularMovies: React.FC<PopularMoviesProps> = ({ movies }) => {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [isHovered, setIsHovered] = useState<string | number | null>(null);
 
-
+  // Format data to currency
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -20,13 +21,6 @@ const PopularMovies: React.FC<PopularMoviesProps> = ({ movies }) => {
     }).format(amount);
   };
 
-  const formatDate = (date: string): string => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
 
   // Keyboard accessibility to close modal
   useEffect(() => {

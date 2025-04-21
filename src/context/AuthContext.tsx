@@ -14,8 +14,11 @@ interface AuthContextType {
   signInWithProvider: (provider: GoogleAuthProvider | FacebookAuthProvider) => Promise<void>;
 }
 
+// context for authentication
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+
+// provider for authentication context
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const auth = getAuth();
   const [user, setUser] = useState<User | null>(null);
@@ -49,6 +52,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+
+// custom hook to use the auth context
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within an AuthProvider');

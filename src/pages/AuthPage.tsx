@@ -8,7 +8,7 @@ const AuthPage = () => {
   const location = useLocation();
   const [isLoginMode, setIsLoginMode] = useState(true);
   
-  // Determine the form mode based on the current route
+  
   useEffect(() => {
     const pathname = location.pathname.toLowerCase();
     setIsLoginMode(pathname === '/auth' || pathname === '/');

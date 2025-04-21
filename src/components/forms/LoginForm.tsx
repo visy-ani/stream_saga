@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Film, Lock, Mail, Key } from "lucide-react";
-import { useAuth } from "../../context/AuthContext"; // Assuming useAuth is set up to provide the authentication methods
-import { useNavigate } from "react-router-dom"; // React Router hook
-import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth"; // Firebase providers
+import { useAuth } from "../../context/AuthContext"; 
+import { useNavigate } from "react-router-dom"; 
+import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth"; 
 
 type LoginFormProps = {
   onSwitchMode: () => void;
@@ -13,8 +13,9 @@ const LoginForm = ({ onSwitchMode }: LoginFormProps) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const { login, signInWithProvider } = useAuth(); 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); 
 
+  // This function Handles login with email and password
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);

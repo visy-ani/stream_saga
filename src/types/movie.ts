@@ -33,7 +33,7 @@ export interface Movie {
 export interface Show {
   id: string;
   primaryTitle: string;
-  originalTitle?: string;  // Make optional if not always present
+  originalTitle?: string;  
   primaryImage: string;
   averageRating: number;
   contentRating: string;
@@ -48,8 +48,8 @@ export interface Show {
   type: string;
   trailer?: string;
   interests?: string[];
-  url?: string;  // Add this property if you need it
-  metascore?: number | null;  // Make optional and handle null
+  url?: string; 
+  metascore?: number | null;  
 }
 
 
@@ -63,7 +63,7 @@ export type PopularMovies = {
   description: string;
   primaryImage: string;
   trailer: string;
-  contentRating?: string;  // Optional
+  contentRating?: string;  
   startYear: number;
   endYear: number | null;
   releaseDate: string;
@@ -79,7 +79,7 @@ export type PopularMovies = {
   isAdult: boolean;
   runtimeMinutes: number;
   averageRating: number;
-  numVotes?: number;  // Optional
+  numVotes?: number;  
   metascore: number;
   audioLanguages: string[];
   location: string[];

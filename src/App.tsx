@@ -21,7 +21,6 @@ const ProtectedRoute = ({ element }: { element: React.ReactElement }) => {
     return <Navigate to={ROUTES.AUTH} replace />;
   }
 
-  // If authenticated, render the element
   return element;
 };
 
