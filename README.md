@@ -2,7 +2,7 @@
 
 An IMDb-style modern movie listing application built using React and TypeScript. It showcases popular movies using a dynamic, responsive interface with stylish UI and smooth user interactions. This is **not** a streaming platform — just a visual movie catalog.
 
-![Hero Section](./screenshots/hero.png)
+![Login/Signup](./screenshots/login.png)
 
 ## 🚀 Features
 
@@ -12,9 +12,7 @@ An IMDb-style modern movie listing application built using React and TypeScript.
 - 🎨 Modern and elegant UI with smooth hover and click animations
 - 🔍 Clean modular code with custom hooks and reusable components
 
-![Movie Grid](./screenshots/grid.png)
-
-![Movie Modal](./screenshots/modal.png)
+![Movies](./screenshots/movies.png)
 
 ## 🛠️ Tech Stack
 
