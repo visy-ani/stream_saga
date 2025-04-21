@@ -48,3 +48,25 @@ export interface Show {
     trailer?: string;
     interests?: string[];
   }
+
+
+export interface PopularMovies {
+    id: string | number;
+    primaryTitle?: string;
+    primaryImage?: string;
+    averageRating?: number;
+    numVotes?: number;
+    description?: string;
+    genres: string[];
+    contentRating?: string;
+    releaseDate?: string;
+    runtimeMinutes?: number;
+    countryOfOrigin?: string;
+    boxOffice?: {
+      currency: string;
+      amount: number;
+    };
+    location?: string;
+    audioLanguages?: string[];
+}
+  

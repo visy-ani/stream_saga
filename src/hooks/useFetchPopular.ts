@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Movie } from '../types/movie'; 
+import { PopularMovies as Movie } from '../types/movie';
 
 const usePopularMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -8,30 +7,40 @@ const usePopularMovies = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const options = {
-        method: 'GET',
-        url: 'https://imdb236.p.rapidapi.com/imdb/most-popular-movies',
-        headers: {
-          'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
-          'x-rapidapi-host': 'imdb236.p.rapidapi.com',
-        },
-      };
+    const controller = new AbortController();
+    const signal = controller.signal;
 
+    const fetchMovies = async () => {
       try {
-        const response = await axios.request(options);
-        const rawData = response.data?.data || [];
-        setMovies(rawData); 
-        setIsLoading(false);
-      } catch {
-        setError('Failed to fetch data');
+        const response = await fetch('https://imdb236.p.rapidapi.com/imdb/most-popular-movies', {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
+            'x-rapidapi-host': 'imdb236.p.rapidapi.com',
+          },
+          signal,
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const data = await response.json();
+        setMovies(data || []);
+      } catch (err: any) {
+        if (err.name !== 'AbortError') {
+          console.error('Fetch error:', err);
+          setError('Failed to fetch data');
+        }
+      } finally {
         setIsLoading(false);
       }
     };
 
     fetchMovies();
-  }, []);
 
+    return () => {
+      controller.abort(); 
+    };
+  }, []);
   return { movies, isLoading, error };
 };
 
