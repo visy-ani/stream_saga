@@ -50,23 +50,42 @@ export interface Show {
   }
 
 
-export interface PopularMovies {
-    id: string | number;
-    primaryTitle?: string;
-    primaryImage?: string;
-    averageRating?: number;
-    numVotes?: number;
-    description?: string;
-    genres: string[];
-    contentRating?: string;
-    releaseDate?: string;
-    runtimeMinutes?: number;
-    countryOfOrigin?: string;
-    boxOffice?: {
-      currency: string;
-      amount: number;
-    };
-    location?: string;
-    audioLanguages?: string[];
-}
+export type PopularMovies = {
+  id: string;
+  url: string;
+  primaryTitle: string;
+  originalTitle: string;
+  type: string;
+  description: string;
+  primaryImage: string;
+  trailer: string;
+  contentRating?: string;  // Optional
+  startYear: number;
+  endYear: number | null;
+  releaseDate: string;
+  interests: string[];
+  countriesOfOrigin: string[];
+  externalLinks: string[];
+  spokenLanguages: string[];
+  filmingLocations: string[];
+  productionCompanies: { id: string; name: string }[];
+  budget: number;
+  grossWorldwide: number;
+  genres: string[];
+  isAdult: boolean;
+  runtimeMinutes: number;
+  averageRating: number;
+  numVotes?: number;  // Optional
+  metascore: number;
+  audioLanguages: string[];
+  location: string[];
+  boxOffice: {
+    gross: number;
+    budget: number;
+    currency: string;
+    amount: number;
+  };
+  countryOfOrigin: string[];
+};
+
   

@@ -149,7 +149,7 @@ const PopularMovies: React.FC<PopularMoviesProps> = ({ movies }) => {
                   </span>
                   <span className="text-gray-400 hidden xs:inline">•</span>
                   <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs sm:text-sm">
-                    {selectedMovie.contentRating ?? 'N/A'}
+                    {selectedMovie?.contentRating ?? 'N/A'}
                   </span>
                 </div>
 
