@@ -22,7 +22,7 @@ export interface Movie {
     spokenLanguages?: string[];
     trailer?: string;
     cast?: Person[];
-    releaseDate?: string;
+    releaseDate?: string | undefined;
     budget?: number;
     filmingLocations?: string[];
     url?: string;
@@ -30,3 +30,21 @@ export interface Movie {
     countriesOfOrigin?: string[];
 }
 
+export interface Show {
+    id: string;
+    primaryTitle: string;
+    primaryImage: string;
+    averageRating: number;
+    contentRating: string;
+    startYear: number;
+    endYear?: number | null;
+    description: string;
+    genres: string[];
+    numVotes: number;
+    releaseDate?: string;
+    countriesOfOrigin?: string[];
+    spokenLanguages?: string[];
+    type: string;
+    trailer?: string;
+    interests?: string[];
+  }

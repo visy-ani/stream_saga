@@ -8,14 +8,20 @@ export const useMovieData = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const formattedData = data.map((item) => ({
+    const formattedData: Movie[] = data.map((item): Movie => ({
       ...item,
       contentRating: item.contentRating || '',
-      metascore: item.metascore || 0,
       grossWorldwide: item.grossWorldwide || 0,
-      spokenLanguages: item.spokenLanguages || [],
-      trailer: item.trailer || undefined, 
+      spokenLanguages: item.spokenLanguages ?? [],
+      trailer: item.trailer ?? undefined,
+      filmingLocations: item.filmingLocations ?? undefined,
+      budget: item.budget ?? undefined,
+      releaseDate: item.releaseDate ?? undefined,
     }));
+    
+    
+    
+    
     setMovies(formattedData);
     setIsLoading(false);
   }, []);

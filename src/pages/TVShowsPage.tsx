@@ -1,9 +1,9 @@
 import TVShows from '../components/TVShows/TVShows'
-import { tvShows } from '../Samples/tvShowsSample'
+import useTop250TVShows from '../hooks/useFetchTVShows'
 
 const TVShowsPage = () => {
   return (
-    <TVShows shows={tvShows}/>
+    <TVShows shows={useTop250TVShows().data ?? []} />
   )
 }
 

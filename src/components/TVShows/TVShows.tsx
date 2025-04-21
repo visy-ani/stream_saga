@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Film, Star, Calendar, Globe, Eye, X, Tv, Languages, Play, Heart, Share2, Award } from 'lucide-react';
-import { Movie } from '../../types/movie';
+import { Show } from '../../types/movie';
 
 interface TVShowsProps {
-  shows: Movie[];
+  shows: Show[] | null; // Changed from Show to Show[] to represent an array of shows
 }
 
-
 const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
-  const [selectedShow, setSelectedShow] = useState<Movie | null>(null);
+  const [selectedShow, setSelectedShow] = useState<Show | null>(null);
   const [hoveredShow, setHoveredShow] = useState<string | null>(null);
   const [modalMode, setModalMode] = useState('details');
   const [animateModal, setAnimateModal] = useState(false);
@@ -56,13 +55,13 @@ const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
 
       {/* Grid Layout */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {shows?.map((show) => (
+        {shows?.map((show: Show) => (
           <div
             key={show.id}
             className="group relative"
             onMouseEnter={() => setHoveredShow(show.id || null)}
             onMouseLeave={() => setHoveredShow(null)}
-            onClick={() => setSelectedShow(show || null)}
+            onClick={() => setSelectedShow(show)}
           >
             <div className={`bg-gray-900/90 backdrop-blur-xl rounded-2xl overflow-hidden border-2 
                          ${hoveredShow === show.id ? 'border-purple-500 shadow-lg shadow-purple-500/30 scale-105' : 'border-gray-800'}
@@ -98,7 +97,7 @@ const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
                 
                 {/* Genres */}
                 <div className="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-4">
-                  {show.genres.slice(0, 3).map((genre, idx) => (
+                  {show.genres.slice(0, 3).map((genre: string, idx: number) => (
                     <span key={idx} className="px-2 py-0.5 md:px-3 md:py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
                       {genre}
                     </span>
@@ -336,7 +335,7 @@ const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
                         Genres
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {selectedShow.genres.map((genre, idx) => (
+                        {selectedShow.genres.map((genre: string, idx: number) => (
                           <span key={idx} className="px-3 py-1 md:px-4 md:py-2 bg-gray-800/70 backdrop-blur-sm border border-gray-700 text-white rounded-full text-xs md:text-sm hover:bg-purple-500/20 hover:border-purple-500/50 transition-colors cursor-pointer">
                             {genre}
                           </span>
@@ -351,7 +350,7 @@ const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
                           Themes
                         </h3>
                         <div className="flex flex-wrap gap-2">
-                          {selectedShow.interests.map((interest, idx) => (
+                          {selectedShow.interests.map((interest: string, idx: number) => (
                             <span key={idx} className="px-2 py-1 md:px-3 md:py-1 bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-gray-300 rounded-lg text-xs md:text-sm hover:bg-pink-500/10 hover:border-pink-500/30 transition-colors cursor-pointer">
                               {interest}
                             </span>
@@ -395,14 +394,14 @@ const TVShows: React.FC<TVShowsProps> = ({ shows }) => {
                 
                 {/* Placeholder seasons */}
                 <div className="space-y-4 md:space-y-6">
-                  {[1, 2, 3].map(season => (
+                  {[1, 2, 3].map((season: number) => (
                     <div key={season} className="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden">
                       <div className="p-3 md:p-4 border-b border-gray-700 flex items-center justify-between">
                         <h4 className="font-semibold text-sm md:text-base text-white">Season {season}</h4>
                         <span className="text-xs md:text-sm text-gray-400">{Math.floor(Math.random() * 10) + 6} Episodes</span>
                       </div>
                       <div className="divide-y divide-gray-700">
-                        {[...Array(3)].map((_, idx) => (
+                        {[...Array(3)].map((_, idx: number) => (
                           <div key={idx} className="p-3 md:p-4 flex items-center hover:bg-gray-800/50 transition-colors">
                             <div className="w-12 h-8 md:w-16 md:h-10 bg-gray-700 rounded mr-3 md:mr-4"></div>
                             <div className="flex-1">

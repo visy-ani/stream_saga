@@ -13,7 +13,7 @@ import PopularPage from "./pages/PopularPage";
 import TVShowsPage from "./pages/TVShowsPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
-const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+const ProtectedRoute = ({ element }: { element: React.ReactElement }) => {
   const { user } = useAuth();
 
   if (!user) {
