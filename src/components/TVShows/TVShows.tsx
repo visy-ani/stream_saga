@@ -3,7 +3,7 @@ import { Film, Star, Calendar, Globe, Eye, X, Tv, Languages, Play, Heart, Share2
 import { Show } from '../../types/movie';
 
 interface TVShowsProps {
-  shows: Show[] | null; // Changed from Show to Show[] to represent an array of shows
+  shows: Show[] | null; 
 }
 
 const TVShows: React.FC<TVShowsProps> = ({ shows }) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Show } from '../types/movie'; 
-
+import { Show } from '../types/movie';
+import { tvShows } from '../Samples/tvShowsSample';
 
 interface UseTop250TVShowsReturn {
   data: Show[] | null;
@@ -29,8 +29,8 @@ const useTop250TVShows = (): UseTop250TVShowsReturn => {
         const response = await axios.request(options);
         const apiData = response.data.results || [];
 
-        // Ensure the fetched data matches the Show interface by mapping through it
-        const formattedData: Show[] = apiData.map((item: any) => ({
+        // If the fetched data is empty, fall back to the sample data
+        const formattedData: Show[] = apiData.length > 0 ? apiData.map((item: any) => ({
           id: item.id || '',
           primaryTitle: item.primaryTitle || '',
           primaryImage: item.primaryImage || '',
@@ -47,9 +47,9 @@ const useTop250TVShows = (): UseTop250TVShowsReturn => {
           type: item.type || '',
           trailer: item.trailer || undefined,
           interests: item.interests || [],
-        }));
+        })) : tvShows;
 
-        setData(formattedData); // Set the correctly formatted data
+        setData(formattedData);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message || 'Something went wrong');
