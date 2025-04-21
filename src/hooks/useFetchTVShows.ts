@@ -29,25 +29,30 @@ const useTop250TVShows = (): UseTop250TVShowsReturn => {
         const response = await axios.request(options);
         const apiData = response.data.results || [];
 
-        // If the fetched data is empty, fall back to the sample data
-        const formattedData: Show[] = apiData.length > 0 ? apiData.map((item: any) => ({
-          id: item.id || '',
-          primaryTitle: item.primaryTitle || '',
-          primaryImage: item.primaryImage || '',
-          averageRating: item.averageRating || 0,
-          contentRating: item.contentRating || '',
-          startYear: item.startYear || 0,
-          endYear: item.endYear || null,
-          description: item.description || '',
-          genres: item.genres || [],
-          numVotes: item.numVotes || 0,
-          releaseDate: item.releaseDate || undefined,
-          countriesOfOrigin: item.countriesOfOrigin || [],
-          spokenLanguages: item.spokenLanguages || [],
-          type: item.type || '',
-          trailer: item.trailer || undefined,
-          interests: item.interests || [],
-        })) : tvShows;
+        // Map the data to match the Show interface
+        const formattedData: Show[] = apiData.length > 0
+          ? apiData.map((item: any) => ({
+              id: item.id || '',
+              primaryTitle: item.primaryTitle || '',
+              originalTitle: item.originalTitle || '',  // Optional field
+              primaryImage: item.primaryImage || '',
+              averageRating: item.averageRating || 0,
+              contentRating: item.contentRating || '',
+              startYear: item.startYear || 0,
+              endYear: item.endYear || null,
+              description: item.description || '',
+              genres: item.genres || [],
+              numVotes: item.numVotes || 0,
+              releaseDate: item.releaseDate || undefined,
+              countriesOfOrigin: item.countriesOfOrigin || [],
+              spokenLanguages: item.spokenLanguages || [],
+              type: item.type || '',
+              trailer: item.trailer || undefined,
+              interests: item.interests || [],
+              url: item.url || '',  // Optional field
+              metascore: item.metascore ?? null,  // Optional field with null handling
+            }))
+          : tvShows;  // Fallback to the sample data if API data is empty
 
         setData(formattedData);
       } catch (err: unknown) {
@@ -56,6 +61,28 @@ const useTop250TVShows = (): UseTop250TVShowsReturn => {
         } else {
           setError('Something went wrong');
         }
+
+        // In case of error, fall back to the sample data
+        console.log("sample used ")
+        setData(tvShows.map((item) => ({
+          id: item.id,
+          primaryTitle: item.primaryTitle,
+          primaryImage: item.primaryImage,
+          averageRating: item.averageRating ?? 0,
+          contentRating: item.contentRating ?? '',
+          startYear: item.startYear ?? 0,
+          endYear: item.endYear ?? null,
+          description: item.description ?? '',
+          genres: item.genres ?? [],
+          numVotes: item.numVotes ?? 0,
+          releaseDate: item.releaseDate ?? '',
+          countriesOfOrigin: item.countriesOfOrigin ?? [],
+          spokenLanguages: item.spokenLanguages ?? [],
+          type: item.type,
+          trailer: item.trailer ?? '',
+          interests: item.interests ?? [],
+        })));
+        
       } finally {
         setLoading(false);
       }

@@ -31,23 +31,27 @@ export interface Movie {
 }
 
 export interface Show {
-    id: string;
-    primaryTitle: string;
-    primaryImage: string;
-    averageRating: number;
-    contentRating: string;
-    startYear: number;
-    endYear?: number | null;
-    description: string;
-    genres: string[];
-    numVotes: number;
-    releaseDate?: string;
-    countriesOfOrigin?: string[];
-    spokenLanguages?: string[];
-    type: string;
-    trailer?: string;
-    interests?: string[];
-  }
+  id: string;
+  primaryTitle: string;
+  originalTitle?: string;  // Make optional if not always present
+  primaryImage: string;
+  averageRating: number;
+  contentRating: string;
+  startYear: number;
+  endYear?: number | null;
+  description: string;
+  genres: string[];
+  numVotes: number;
+  releaseDate?: string;
+  countriesOfOrigin?: string[];
+  spokenLanguages?: string[];
+  type: string;
+  trailer?: string;
+  interests?: string[];
+  url?: string;  // Add this property if you need it
+  metascore?: number | null;  // Make optional and handle null
+}
+
 
 
 export type PopularMovies = {
